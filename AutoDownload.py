@@ -158,7 +158,6 @@ options.add_argument("--disable-gpu")
 options.add_argument("--headless")
 
 driver = webdriver.Chrome(options=options)
-# TODO Hide? driver.minimize_window()
 
 login(driver)
 
