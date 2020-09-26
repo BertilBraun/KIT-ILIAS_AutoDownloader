@@ -3,8 +3,16 @@
  
 ___
 
-## How to Use
+## How it Works
+
+  * The Program opens a virtual Browser Window and emulates a user.
+  * It first has to login using the **necessary provided Credentials** to get access to the downloads page.
+  * Then it crawls through every day, dowloading every PDF file from that day.
+  * Afterwards the files are sorted into the folder structure as seen above in the 'Vorkurs Mathematik' folder.
+
 ___
+
+## How to Use
 
  ### Simply download the 'dist' Folder and run the Program 'AutoDownload.exe'.
  To Verify: `0f1eed7b7309c3bb7858ebb08e950a8f` MD5 Checksum.
@@ -19,7 +27,6 @@ ___
 ___
 
 ## How to Run
-___
 
  If you want to run the Program yourself, you need to have.
  
