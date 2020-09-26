@@ -25,6 +25,12 @@ def login(driver):
 
     driver.execute_script("arguments[0].click();", driver.find_element_by_xpath('//*[@id="sbmt"]'))
 
+    try:
+        driver.find_element_by_xpath('//*[@id="il_mhead_t_focus"]')
+    except :
+        print("Username or Password was invalid!")
+        sys.exit(1)
+
     return 
 
 def createFolderStructure():

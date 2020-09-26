@@ -7,7 +7,7 @@ ___
 ___
 
  ##### Simply download the 'dist' Folder and run the Program 'AutoDownload.exe'.
- To Verify: `0f601ffc6d1bf9d0d7a91b56acbedae1` MD5 Checksum.
+ To Verify: `0f1eed7b7309c3bb7858ebb08e950a8f` MD5 Checksum.
  
  You **need** to have the 'chromedriver.exe' in the same Folder and Google Chrome Version 85 installed.
  
