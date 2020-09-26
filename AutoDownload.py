@@ -100,7 +100,10 @@ def crawlDay(driver, dayName, href):
 
         for file in files:
             newFileName = dir + str(dayNumber) + ".  " + os.path.split(file)[1] # path split gets filename + extension
-            os.rename(file, newFileName)
+            if not os.path.exists(newFileName):
+                os.rename(file, newFileName)
+            else:
+                os.remove(file)
 
     #open tab ?
 
