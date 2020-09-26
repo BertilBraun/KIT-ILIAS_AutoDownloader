@@ -6,7 +6,7 @@ ___
 ## How to Use
 ___
 
- ##### Simply download the 'dist' Folder and run the Program 'AutoDownload.exe'.
+ ### Simply download the 'dist' Folder and run the Program 'AutoDownload.exe'.
  To Verify: `0f1eed7b7309c3bb7858ebb08e950a8f` MD5 Checksum.
  
  You **need** to have the 'chromedriver.exe' in the same Folder and Google Chrome Version 85 installed.
