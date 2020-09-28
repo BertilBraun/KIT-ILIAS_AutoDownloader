@@ -29,9 +29,15 @@ def login(driver):
         driver.find_element_by_xpath('//*[@id="il_mhead_t_focus"]')
     except :
         print("Username or Password was invalid!")
-        sys.exit(1)
+        time.sleep(3)
+        sys.exit(0)
 
     return 
+
+def deleteFolder(dir):
+    if os.path.exists(os.getcwd() + dir):
+        os.system('rmdir /S /Q "' + os.getcwd() + dir + '"')
+        time.sleep(1)
 
 def createFolderStructure():
     
@@ -69,7 +75,8 @@ def createFolderStructure():
             createFolder(baseDir + "/Woche " + str(i + 1) + "/Aufgabe")
             createFolder(baseDir + "/Woche " + str(i + 1) + "/Ergebnis")
             createFolder(baseDir + "/Woche " + str(i + 1) + "/Lösung")
-
+           
+    deleteFolder("/DownloadTemp")
     createFolder("/DownloadTemp")
 
     if os.path.exists(os.getcwd() + "/Vorkurs Mathematik/"):
@@ -78,10 +85,10 @@ def createFolderStructure():
 
         if overwrite.strip().lower() == "n":
             sys.exit(0)
-
-        os.system("rmdir /S /Q " + os.getcwd() + '"/Vorkurs Mathematik/"')
-        time.sleep(3)
-
+            
+        deleteFolder("/Vorkurs Mathematik")
+        
+    createFolder("/Vorkurs Mathematik/Info")
     createWeeks("/Vorkurs Mathematik/Skript")
     createWeeks("/Vorkurs Mathematik/Kompakt")
     aufgabenFolder("/Vorkurs Mathematik/Aufgaben")
@@ -95,9 +102,12 @@ def crawlDay(driver, dayName, href):
     dayNumber = int(dayName[4:6])
     weekNumber = ((dayNumber - 1) // 5) + 1
     
-    def moveToFolder(baseDir, subDir = ""):
+    def moveToFolder(baseDir, subDir = "", addweek = True):
 
-        dir = os.getcwd() + "/Vorkurs Mathematik/" + baseDir + "/Woche " + str(weekNumber) + subDir + "/"
+        if addweek:
+            dir = os.getcwd() + "/Vorkurs Mathematik/" + baseDir + "/Woche " + str(weekNumber) + subDir + "/"
+        else:
+            dir = os.getcwd() + "/Vorkurs Mathematik/" + baseDir + subDir + "/"
 
         files = []
         while not files:
@@ -130,10 +140,12 @@ def crawlDay(driver, dayName, href):
             driver.get(link)
             moveToFolder("Kompakt")
         elif name.startswith("vkm"):
+            if "info" in name:
+                driver.get(link)
+                moveToFolder("Info", addweek = False)
             if name.endswith("erg"):
                 driver.get(link)
                 moveToFolder("Aufgaben", "/Ergebnis")
-                pass
             elif name.endswith("lsg"):
                 driver.get(link)
                 moveToFolder("Aufgaben", "/Lösung")
@@ -163,13 +175,24 @@ options.add_experimental_option('prefs', {
     "download.directory_upgrade": True,
     "plugins.always_open_pdf_externally": True #It will not show PDF directly in chrome
 })
-options.add_argument("--disable-gpu")
-options.add_argument("--headless")
+#options.add_argument("--disable-gpu")
+#options.add_argument("--headless")
 
-driver = webdriver.Chrome(options=options)
+try:
+    driver = webdriver.Chrome(options=options)
+except :
+    print("Webdriver not found, please check the chromedriver.exe, the Version of the driver and your Google Chrome")
+    time.sleep(3)
+    sys.exit(0)
 
 login(driver)
 
+# expand Weeks to load day data
+for element in driver.find_elements_by_class_name('ilContainerBlockHeaderCollapsed'):
+    driver.execute_script('arguments[0].click();', element)
+  
+time.sleep(1)
+  
 days = []
 for element in driver.find_elements_by_partial_link_text('Tag '):
     days.append((element.text, element.get_attribute('href')))
@@ -177,5 +200,6 @@ for element in driver.find_elements_by_partial_link_text('Tag '):
 for dayName, href in days:
     crawlDay(driver, dayName, href)
 
-os.rmdir(os.getcwd() + "/DownloadTemp")
+deleteFolder("/DownloadTemp")
+print("\nDone!")
 driver.close()

@@ -5,17 +5,20 @@ ___
 
 ## How it Works
 
-  * The Program opens a virtual Browser Window and emulates a user.
   * It first has to login using the **necessary provided Credentials** to get access to the downloads page.
+  * The Program opens a virtual Browser Window and emulates a user.
+    ![alt text](https://github.com/BertilBraun/KIT-ILIAS_AutoDownloader/raw/master/Images/Login.png "Login Example")
   * Then it crawls through every day, dowloading every PDF file from that day.
+    ![alt text](https://github.com/BertilBraun/KIT-ILIAS_AutoDownloader/raw/master/Images/Downloading.png "Downloading Example")
   * Afterwards the files are sorted into the folder structure as seen above in the 'Vorkurs Mathematik' folder.
+    ![alt text](https://github.com/BertilBraun/KIT-ILIAS_AutoDownloader/raw/master/Images/Done.png "Sorting Example")
 
 ___
 
 ## How to Use
 
  ### Simply download the 'dist' Folder and run the Program 'AutoDownload.exe'.
- To Verify: `0f1eed7b7309c3bb7858ebb08e950a8f` MD5 Checksum.
+ To Verify: `8a0e8019191ac29a97e64b297a4c5513` MD5 Checksum.
  
  You **need** to have the 'chromedriver.exe' in the same Folder and Google Chrome Version 85 installed.
  
