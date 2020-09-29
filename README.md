@@ -28,7 +28,19 @@ ___
  If you have another version of Google Chrome installed you can get the working driver from [here](https://chromedriver.chromium.org/downloads).
  
 ___
+## Fix virus Scan Failed
 
+1. From the Start screen, type regedit.exe, and then press Enter.
+
+2. Go to the following registry key:
+HKEY_LOCAL_MACHINE >SOFTWARE >Microsoft >Windows >CurrentVersion >Policies >Attachments
+
+3. Double click on “ScanWithAntivirus” registry key and change its value to '1' which is by default '3'.
+
+For the official Microsoft support Page click [here](https://support.microsoft.com/en-us/help/883260/information-about-the-attachment-manager-in-microsoft-windows).
+This fix does not interfear with the blocking of actual Maleware.
+
+___
 ## How to Run
 
  If you want to run the Program yourself, you need to have.
